@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rizki Ganteng Banget, Sigma, Rizz, Mewing, Skibidi</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: white;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.item {
+  background: #1e293b;
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.preview {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.raw {
+  font-size: 12px;
+  opacity: 0.6;
+  margin-bottom: 8px;
+  word-break: break-all;
+}
+
+button {
+  background: #38bdf8;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: black;
+  font-weight: bold;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+</style>
+</head>
+
+<body>
+
+<h2>✨ Aesthetic Words ML ✨</h2>
+<div id="list"></div>
+
+<script>
+const data = [
+];
+
+function parseML(text) {
+  let color = "#ffffff";
+  return text
+    .replace(/\[([A-F0-9]{6})\]/g, (_, c) => {
+      color = "#" + c;
+      return `<span style="color:${color}">`;
+    })
+    .replace(/\[i\]/g, "<i>")
+    .replace(/\[\/i\]/g, "</i>")
+    .replace(/\[b\]/g, "<b>")
+    .replace(/\[\/b\]/g, "</b>")
+    + "</span>";
+}
+
+function copyText(text) {
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  document.body.removeChild(textarea);
+}
+
+const container = document.getElementById("list");
+
+data.forEach((text, index) => {
+  const div = document.createElement("div");
+  div.className = "item";
+
+  const preview = document.createElement("div");
+  preview.className = "preview";
+  preview.innerHTML = (index + 1) + ". " + parseML(text);
+
+  const raw = document.createElement("div");
+  raw.className = "raw";
+  raw.textContent = text;
+
+  const btn = document.createElement("button");
+  btn.textContent = "Copy";
+  btn.onclick = () => {
+    copyText(text);
+    btn.textContent = "Copied!";
+    setTimeout(() => btn.textContent = "Copy", 1000);
+  };
+
+  div.appendChild(preview);
+  div.appendChild(raw);
+  div.appendChild(btn);
+
+  container.appendChild(div);
+});
+</script>
+
+</body>
+</html>
